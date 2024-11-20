@@ -1,6 +1,5 @@
 package com.example.kenroku_app.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
@@ -11,33 +10,33 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import org.json.JSONObject
 
 class HomeViewModel : ViewModel() {
 
     private lateinit var mMap: GoogleMap
-    private val TAG: String = "HomeViewModel"
     private lateinit var googleMapMarker: GoogleMapMarker
-    // 移動の制限範囲
-    val latLngBounds = LatLngBounds(
-        LatLng(36.5600, 136.6594),  // SW bounds
-        LatLng(36.5648, 136.6653) // NE bounds
-    )
-    val yamanakaLatLngBounds = LatLngBounds(
-        LatLng(36.227973, 136.358795),  // SW bounds
-        LatLng(36.253658, 136.377376) // NE bounds
-    )
-    val yamanaka = true
-    val MINZOOM = 16.5f
-    val MINZOOM2 = 15.5f
-    val MAXZOOM = 20.0f
+
+    private lateinit var _mapConfig: JSONObject
 
     fun initializeMap(googleMap: GoogleMap) {
         mMap = googleMap
-        mMap.setMinZoomPreference(MINZOOM2)
-        mMap.setMaxZoomPreference(MAXZOOM)
-        Log.d(TAG, "onMapReady")
 
-        setMapBounds(yamanakaLatLngBounds)
+        // ズームレベルの制限
+        val zoomLimits = _mapConfig.getJSONObject("zoomLimits")
+        mMap.setMinZoomPreference(zoomLimits.getDouble("minZoom").toFloat())
+        mMap.setMaxZoomPreference(zoomLimits.getDouble("maxZoom").toFloat())
+
+        // 移動範囲の制限
+        val mapBounds = _mapConfig.getJSONObject("mapBounds")
+        val southwest = mapBounds.getJSONObject("southwest")
+        val northeast = mapBounds.getJSONObject("northeast")
+        val bounds = LatLngBounds(
+            LatLng(southwest.getDouble("latitude"), southwest.getDouble("longitude")),
+            LatLng(northeast.getDouble("latitude"), northeast.getDouble("longitude"))
+        )
+        setMapBounds(bounds)
+
         addOverlaysAndCamera()
         addKenrokuenMarker()
         mMap.uiSettings.isZoomControlsEnabled = true
@@ -52,37 +51,61 @@ class HomeViewModel : ViewModel() {
     }
 
     private fun addOverlaysAndCamera() {
-        if(yamanaka){
-            yamanakaConfig()
-            return
+        // 初期位置設定
+        val initialLocation = _mapConfig.getJSONObject("initialLocation")
+        val lat = initialLocation.getDouble("latitude")
+        val lng = initialLocation.getDouble("longitude")
+        val zoom = initialLocation.getDouble("zoom").toFloat()
+        setInitialCameraPosition(LatLng(lat, lng),zoom)
+
+        if (_mapConfig.has("backgroundOverlayImage")) {
+            val backgroundOverlayConfig = _mapConfig.getJSONObject("backgroundOverlayImage")
+            //今後API作成したとき用
+            val backgroundOverlayUrl = backgroundOverlayConfig.getString("url")
+            val backgroundOverlayPosition = backgroundOverlayConfig.getJSONObject("position")
+            val backgroundOverlayLat = backgroundOverlayPosition.getDouble("latitude")
+            val backgroundOverlayLng = backgroundOverlayPosition.getDouble("longitude")
+            val backgroundOverlayWidth = backgroundOverlayConfig.getInt("width").toFloat()
+            val backgroundOverlayHeight = backgroundOverlayConfig.getInt("height").toFloat()
+            val backgroundOverlayLatLng = LatLng(backgroundOverlayLat, backgroundOverlayLng)
+
+            //背景
+            val backgroundOverlayMap = GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.white))
+                .position(backgroundOverlayLatLng, backgroundOverlayWidth, backgroundOverlayHeight)
+            mMap.addGroundOverlay(backgroundOverlayMap)
         }
-        //オーバーレイの地図を設定
-        val kenrokuenLatLng = LatLng(36.5625, 136.66227)
-        //地図
-        val kenrokuenMap = GroundOverlayOptions()
-            .image(BitmapDescriptorFactory.fromResource(R.drawable.map_kenrokuen))
-            .position(kenrokuenLatLng, 528f, 528f)
-        //背景
-        val kenrokuenMapWhite = GroundOverlayOptions()
-            .image(BitmapDescriptorFactory.fromResource(R.drawable.white))
-            .position(kenrokuenLatLng, 2000f, 2000f)
-        mMap.addGroundOverlay(kenrokuenMapWhite)
-        mMap.addGroundOverlay(kenrokuenMap)
 
-        setInitialCameraPosition(kenrokuenLatLng)
+        if (_mapConfig.has("overlayImage")) {
+            val overlayConfig = _mapConfig.getJSONObject("overlayImage")
+            //今後API作成したとき用
+            val overlayUrl = overlayConfig.getString("url")
+            val overlayPosition = overlayConfig.getJSONObject("position")
+            val overlayLat = overlayPosition.getDouble("latitude")
+            val overlayLng = overlayPosition.getDouble("longitude")
+            val overlayWidth = overlayConfig.getInt("width").toFloat()
+            val overlayHeight = overlayConfig.getInt("height").toFloat()
+            val overlayLatLng = LatLng(overlayLat, overlayLng)
+
+            //地図
+            val overlayMap = GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.map_kenrokuen))
+                .position(overlayLatLng, overlayWidth, overlayHeight)
+
+            mMap.addGroundOverlay(overlayMap)
+        }
     }
 
-    private fun yamanakaConfig() {
-        val yamanakaLatLng = LatLng(36.246801, 136.373319)
-        setInitialCameraPosition(yamanakaLatLng)
-    }
-
-    private fun setInitialCameraPosition(latLng: LatLng) {
+    private fun setInitialCameraPosition(latLng: LatLng, zoom: Float) {
         //カメラとズームの初期位置設定
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng))
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(16.5f))
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(zoom))
     }
     private fun addKenrokuenMarker() {
 
+    }
+
+    fun setMapConfig(mapConfig: JSONObject) {
+        _mapConfig = mapConfig
     }
 }

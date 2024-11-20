@@ -1,0 +1,39 @@
+{
+  "initialLocation": {
+    "latitude": 36.246801,
+    "longitude": 136.373319,
+    "zoom": 16.5
+  },
+  "zoomLimits": {
+    "minZoom": 16.5,
+    "maxZoom": 20.0
+  },
+  "mapBounds": {
+    "southwest": {
+      "latitude": 36.5600,
+      "longitude": 136.6594
+    },
+    "northeast": {
+      "latitude": 36.5648,
+      "longitude": 136.6653
+    }
+  },
+  "overlayImage": {
+    "url": "https://example.com/overlay_image.png",
+    "width": 528,
+    "height": 528,
+    "position": {
+      "latitude": 36.5625,
+      "longitude": 136.66227
+    }
+  },
+  "backgroundOverlayImage": {
+    "url": "https://example.com/overlay_image.png",
+    "width": 2000,
+    "height": 2000,
+    "position": {
+      "latitude": 36.5625,
+      "longitude": 136.66227
+    }
+  }
+}

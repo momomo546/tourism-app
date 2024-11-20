@@ -1,6 +1,7 @@
 package com.example.kenroku_app.view.fragments.home
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
@@ -24,6 +25,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
+import org.json.JSONObject
 
 class HomeFragment : Fragment(), OnMapReadyCallback{
     private val homeViewModel: HomeViewModel by viewModels()
@@ -32,6 +34,15 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     private val TAG: String = MainActivity::class.java.simpleName
     private var isStart = false
     private lateinit var googleMapMarker: GoogleMapMarker
+
+    // 指定された観光地IDに基づいて設定を読み込む
+    private fun loadMapConfig(context: Context, id: String): JSONObject {
+        val fileName = "${id}_map_setting.json"
+        val assetManager = context.assets
+        val inputStream = assetManager.open(fileName)
+        val jsonString = inputStream.bufferedReader().use { it.readText() }
+        return JSONObject(jsonString)
+    }
 
     // Fragmentで表示するViewを作成するメソッド
     override fun onCreateView(
@@ -55,8 +66,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     override fun onMapReady(googleMap: GoogleMap) {
         if (isStart) return
         isStart = true
-        mMap=googleMap
-        homeViewModel.initializeMap(googleMap)
+        mMap = googleMap
 
         if (ActivityCompat.checkSelfPermission(
                 requireContext(),
@@ -65,6 +75,12 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         ) {
             mMap.isMyLocationEnabled = true
         }
+
+        //後でまえのFragmentからIDを受け取るように変更
+        val touristSpotId = "kenrokuen"
+        val mapConfig = loadMapConfig(requireContext(), touristSpotId)
+        homeViewModel.setMapConfig(mapConfig)
+        homeViewModel.initializeMap(googleMap)
 
         googleMapMarker = GoogleMapMarker(requireContext(), mMap)
         googleMapMarker.addMarker()

@@ -1,0 +1,21 @@
+{
+  "initialLocation": {
+    "latitude": 36.246801,
+    "longitude": 136.373319,
+    "zoom": 16.5
+  },
+  "zoomLimits": {
+    "minZoom": 15.5,
+    "maxZoom": 20.0
+  },
+  "mapBounds": {
+    "southwest": {
+      "latitude": 36.227973,
+      "longitude": 136.358795
+    },
+    "northeast": {
+      "latitude": 36.253658,
+      "longitude": 136.377376
+    }
+  }
+}
