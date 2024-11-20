@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "141407577636",
+    "project_id": "tourism-app-2d738",
+    "storage_bucket": "tourism-app-2d738.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:141407577636:android:e8f922b4091ea39f839ab1",
+        "android_client_info": {
+          "package_name": "com.example.kenroku_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCVWIlprMSEKpXshnoZ0DpTL6QdS1y9-0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

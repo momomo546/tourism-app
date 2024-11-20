@@ -2,7 +2,6 @@ package com.example.kenroku_app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.kenroku_app.R
-import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
 import com.example.kenroku_app.model.services.google_map.GoogleMapPolyline
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,7 +14,6 @@ import org.json.JSONObject
 class HomeViewModel : ViewModel() {
 
     private lateinit var mMap: GoogleMap
-    private lateinit var googleMapMarker: GoogleMapMarker
 
     private lateinit var _mapConfig: JSONObject
 

@@ -34,6 +34,24 @@ class MarkerDetailFragment : Fragment() {
         val photoImageView = view.findViewById<ImageView>(R.id.photoImageView)
         val textTextView = view.findViewById<TextView>(R.id.textTextView)
 
+//        val spotIdTest = "kenrokuen"
+//
+//        // Firebase Storageの参照を取得
+//        val storage = FirebaseStorage.getInstance()
+//        val storageRef = storage.reference
+//        val imageRef = storageRef.child("$spotIdTest/image_marker_01") // 保存した画像のパス
+//
+//        // 画像のダウンロードURLを取得
+//        imageRef.downloadUrl.addOnSuccessListener { uri ->
+//            // Glideで画像をロード
+//            Glide.with(this)
+//                .load(uri)
+//                .into(photoImageView)
+//        }.addOnFailureListener {
+//            // エラー時の処理
+//            it.printStackTrace()
+//        }
+
         // 写真とテキストを表示
         photoImageView.setImageResource(resourceImg)
         textTextView.text = getString(resourceText)
