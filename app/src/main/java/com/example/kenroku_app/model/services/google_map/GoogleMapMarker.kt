@@ -1,7 +1,9 @@
 package com.example.kenroku_app.model.services.google_map
 
 import android.content.Context
+import android.content.res.AssetManager
 import android.media.MediaPlayer
+import android.util.Log
 import android.widget.Toast
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.AchieveData
@@ -13,13 +15,23 @@ import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import org.json.JSONObject
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStreamReader
 import java.util.Vector
 
-class GoogleMapMarker(val context: Context, val mMap: GoogleMap) {
-    private val assetManager = context.assets
-    //private val inputStream = assetManager.open("markerList.json") //Jsonファイル
-    private val inputStream = assetManager.open("yamanakaMarkerList.json")
+class GoogleMapMarker(
+    val context: Context,
+    val mMap: GoogleMap,
+    val touristSpotId: String,
+    assetManager: AssetManager
+) {
+    private val inputStream = try {
+        // touristSpotIdに基づいてファイルパスを生成し、JSONファイルを開く
+        assetManager.open("$touristSpotId/marker_list.json")
+    } catch (e: IOException) {
+        Log.e("GoogleMapMarker", "ファイルが見つかりません: $touristSpotId/marker_list.json", e)
+        null  // ファイルがない場合はnullを返す
+    }
     private val bufferedReader = BufferedReader(InputStreamReader(inputStream))
     private val str: String = bufferedReader.readText() //データ
     var markerList: Vector<MarkerOptions> = Vector()

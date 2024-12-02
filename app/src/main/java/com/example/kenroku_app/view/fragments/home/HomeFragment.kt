@@ -1,8 +1,8 @@
 package com.example.kenroku_app.view.fragments.home
 
 import android.Manifest
-import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.AssetManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -25,7 +25,13 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONArray
 import org.json.JSONObject
+import java.io.IOException
 
 class HomeFragment : Fragment(), OnMapReadyCallback{
     private val homeViewModel: HomeViewModel by viewModels()
@@ -36,13 +42,23 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     private lateinit var googleMapMarker: GoogleMapMarker
 
     // 指定された観光地IDに基づいて設定を読み込む
-    private fun loadMapConfig(context: Context, id: String): JSONObject {
-        val fileName = "${id}_map_setting.json"
-        val assetManager = context.assets
-        val inputStream = assetManager.open(fileName)
-        val jsonString = inputStream.bufferedReader().use { it.readText() }
-        return JSONObject(jsonString)
+    private fun loadMapConfig(assetManager: AssetManager, id: String): JSONObject {
+        val fileName = "$id/map_setting.json"
+       try {
+            val inputStream = assetManager.open(fileName)
+            val jsonString = inputStream.bufferedReader().use { it.readText() }
+            return JSONObject(jsonString)
+        } catch (e: IOException) {
+            Log.e("loadMapConfig", "ファイルが見つかりません: $fileName", e)
+            return JSONObject()
+        }
     }
+    private fun loadMapStyle(assetManager: AssetManager, id: String): JSONArray{
+        val inputStream = assetManager.open("$id/map_style.json")
+        val style = inputStream.bufferedReader().use { it.readText() }
+        return JSONArray(style)
+    }
+
 
     // Fragmentで表示するViewを作成するメソッド
     override fun onCreateView(
@@ -77,28 +93,28 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         }
 
         //後でまえのFragmentからIDを受け取るように変更
-        val touristSpotId = "kenrokuen"
-        val mapConfig = loadMapConfig(requireContext(), touristSpotId)
-        homeViewModel.setMapConfig(mapConfig)
-        homeViewModel.initializeMap(googleMap)
+        val touristSpotId = "yamanaka_onsen"
+        CoroutineScope(Dispatchers.IO).launch {
+            val assetManager = requireContext().assets
+            val mapConfig = loadMapConfig(assetManager, touristSpotId)
+            googleMapMarker = GoogleMapMarker(requireContext(), mMap, touristSpotId, assetManager)
+            val mapStyle = loadMapStyle(assetManager,touristSpotId)
+            withContext(Dispatchers.Main) {
+                val success = mMap.setMapStyle(MapStyleOptions(mapStyle.toString()))
 
-        googleMapMarker = GoogleMapMarker(requireContext(), mMap)
-        googleMapMarker.addMarker()
-        MarkerData.googleMapMarker = googleMapMarker
+                if (!success) {
+                    Log.e("MapStyle", "スタイルの適用に失敗しました。")
+                }
+                homeViewModel.setMapConfig(mapConfig)
+                homeViewModel.initializeMap(googleMap)
 
-        val success = mMap.setMapStyle(
-            activity?.let {
-                MapStyleOptions.loadRawResourceStyle(
-                    it, R.raw.style_json_test
-                )
+                googleMapMarker.addMarker()
+                MarkerData.googleMapMarker = googleMapMarker
             }
-        )
-        if (!success) {
-            Log.e(TAG, "Style parsing failed.")
         }
 
         // 情報ウィンドウの設定
-        googleMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
+        mMap.setInfoWindowAdapter(object : GoogleMap.InfoWindowAdapter {
             override fun getInfoWindow(marker: Marker): View? {
                 return null
             }
