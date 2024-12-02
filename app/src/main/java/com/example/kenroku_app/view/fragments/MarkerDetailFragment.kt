@@ -1,4 +1,4 @@
-package com.example.kenroku_app.model.services.google_map
+package com.example.kenroku_app.view.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -25,11 +25,12 @@ class MarkerDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val markerId = arguments?.getString("id")
+        val markerId = arguments?.getString("markerId")
+        val touristSpotId = arguments?.getString("touristSpotId")
 
         // マーカーIDに対応するリソースIDをマップから取得
-        val resourceImg = getResources().getIdentifier("img_$markerId", "drawable", requireContext().packageName)
-        val resourceText = getResources().getIdentifier("detail_info_$markerId", "string", requireContext().packageName)
+        val resourceImg = getResources().getIdentifier("${touristSpotId}_img_${markerId}", "drawable", requireContext().packageName)
+        val resourceText = getResources().getIdentifier("detail_info_${markerId}", "string", requireContext().packageName)
 
         val photoImageView = view.findViewById<ImageView>(R.id.photoImageView)
         val textTextView = view.findViewById<TextView>(R.id.textTextView)

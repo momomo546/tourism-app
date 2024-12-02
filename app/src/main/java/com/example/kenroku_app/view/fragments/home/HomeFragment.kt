@@ -17,8 +17,7 @@ import androidx.navigation.findNavController
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.MarkerData
 import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
-import com.example.kenroku_app.model.services.google_map.MarkerDetailFragment
-import com.example.kenroku_app.view.activities.MainActivity
+import com.example.kenroku_app.view.fragments.MarkerDetailFragment
 import com.example.kenroku_app.viewmodel.HomeViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -37,7 +36,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     private val homeViewModel: HomeViewModel by viewModels()
 
     private lateinit var mMap: GoogleMap
-    private val TAG: String = MainActivity::class.java.simpleName
     private var isStart = false
     private lateinit var googleMapMarker: GoogleMapMarker
 
@@ -58,7 +56,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         val style = inputStream.bufferedReader().use { it.readText() }
         return JSONArray(style)
     }
-
 
     // Fragmentで表示するViewを作成するメソッド
     override fun onCreateView(
@@ -93,7 +90,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         }
 
         //後でまえのFragmentからIDを受け取るように変更
-        val touristSpotId = "yamanaka_onsen"
+        val touristSpotId = "kenrokuen"
         CoroutineScope(Dispatchers.IO).launch {
             val assetManager = requireContext().assets
             val mapConfig = loadMapConfig(assetManager, touristSpotId)
@@ -147,7 +144,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
                     val markerId = marker.tag as? String
 
                     val bundle = Bundle()
-                    bundle.putString("id", markerId)
+                    bundle.putString("markerId", markerId)
+                    bundle.putString("touristSpotId", touristSpotId)
 
                     val receivingFragment = MarkerDetailFragment()
                     receivingFragment.arguments = bundle

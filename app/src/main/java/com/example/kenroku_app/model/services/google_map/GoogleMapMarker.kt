@@ -22,7 +22,7 @@ import java.util.Vector
 class GoogleMapMarker(
     val context: Context,
     val mMap: GoogleMap,
-    val touristSpotId: String,
+    touristSpotId: String,
     assetManager: AssetManager
 ) {
     private val inputStream = try {
@@ -47,15 +47,13 @@ class GoogleMapMarker(
             val latLng = LatLng(jsonData.getDouble("lat"),jsonData.getDouble("lng"))
             val name = jsonData.getString("name")
             //val iconColor = jsonData.getString("icon")
-            //val resourceText = context.resources.getIdentifier("$name", "string", context.packageName)
-            val resourceText = context.getString(R.string.yamanakaza)
+            val resourceText = context.resources.getIdentifier("${touristSpotId}_${name}", "string", context.packageName)
             markerPosition.add(latLng)
             markerList.add(
                 MarkerOptions()
                     .position(markerPosition[i])
                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
-                    //.title(context.getString(resourceText))
-                    .title(resourceText)
+                    .title(context.getString(resourceText))
             )
         }
         MarkerData.markerList = markerList
@@ -70,7 +68,7 @@ class GoogleMapMarker(
             )
             val formattedIndex = String.format("%02d", index + 1)
             val marker = mMap.addMarker(value)
-            marker?.tag = "marker_$formattedIndex"
+            marker?.tag = "marker_${formattedIndex}"
             addMarkerList.add(marker)
         }
     }

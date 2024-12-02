@@ -10,8 +10,8 @@ class MapListViewModel : ViewModel() {
 
     private val _mapList = MutableLiveData<List<MapData>>().apply {
         value = listOf(
-            MapData(R.drawable.img_marker_04, R.string.kenrokuen),
-            MapData(R.drawable.img_marker_06, R.string.yamanaka_onsen),
+            MapData(R.drawable.kenrokuen_img_marker_04, R.string.kenrokuen),
+            MapData(R.drawable.kenrokuen_img_marker_06, R.string.yamanaka_onsen),
         )
     }
     val mapList: LiveData<List<MapData>> = _mapList
