@@ -27,11 +27,11 @@ class GPSManager(
     private val locationManager: LocationManager by lazy {
         context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
+    val locationCheck = LocationCheck()
 
     private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             // 位置情報が変更されたときの処理
-            val locationCheck = LocationCheck()
             isLocation = locationCheck.isWithinRange(location)
             if(isLocation) {
                 visitCount.add()

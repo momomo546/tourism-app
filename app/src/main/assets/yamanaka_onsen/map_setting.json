@@ -16,6 +16,7 @@
     "northeast": {
       "latitude": 36.253658,
       "longitude": 136.377376
-    }
+    },
+    "radius": 5000.0
   }
 }

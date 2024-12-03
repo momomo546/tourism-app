@@ -16,7 +16,8 @@
     "northeast": {
       "latitude": 36.5648,
       "longitude": 136.6653
-    }
+    },
+    "radius": 262.0
   },
   "overlayImage": {
     "url": "https://example.com/overlay_image.png",

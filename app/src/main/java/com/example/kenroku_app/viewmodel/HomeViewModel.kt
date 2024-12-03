@@ -2,6 +2,7 @@ package com.example.kenroku_app.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.example.kenroku_app.R
+import com.example.kenroku_app.model.repositories.data.TouristSpotData
 import com.example.kenroku_app.model.services.google_map.GoogleMapPolyline
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -29,6 +30,7 @@ class HomeViewModel : ViewModel() {
         val mapBounds = _mapConfig.getJSONObject("mapBounds")
         val southwest = mapBounds.getJSONObject("southwest")
         val northeast = mapBounds.getJSONObject("northeast")
+        TouristSpotData.radius = mapBounds.getDouble("radius")
         val bounds = LatLngBounds(
             LatLng(southwest.getDouble("latitude"), southwest.getDouble("longitude")),
             LatLng(northeast.getDouble("latitude"), northeast.getDouble("longitude"))
@@ -53,6 +55,7 @@ class HomeViewModel : ViewModel() {
         val initialLocation = _mapConfig.getJSONObject("initialLocation")
         val lat = initialLocation.getDouble("latitude")
         val lng = initialLocation.getDouble("longitude")
+        TouristSpotData.centerLatLng = LatLng(lat,lng)
         val zoom = initialLocation.getDouble("zoom").toFloat()
         setInitialCameraPosition(LatLng(lat, lng),zoom)
 

@@ -16,6 +16,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.MarkerData
+import com.example.kenroku_app.model.repositories.data.TouristSpotData
 import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
 import com.example.kenroku_app.view.fragments.MarkerDetailFragment
 import com.example.kenroku_app.viewmodel.HomeViewModel
@@ -40,8 +41,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     private lateinit var googleMapMarker: GoogleMapMarker
 
     // 指定された観光地IDに基づいて設定を読み込む
-    private fun loadMapConfig(assetManager: AssetManager, id: String): JSONObject {
-        val fileName = "$id/map_setting.json"
+    private fun loadMapConfig(assetManager: AssetManager): JSONObject {
+        val fileName = "${TouristSpotData.touristSpotId}/map_setting.json"
        try {
             val inputStream = assetManager.open(fileName)
             val jsonString = inputStream.bufferedReader().use { it.readText() }
@@ -51,8 +52,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
             return JSONObject()
         }
     }
-    private fun loadMapStyle(assetManager: AssetManager, id: String): JSONArray{
-        val inputStream = assetManager.open("$id/map_style.json")
+    private fun loadMapStyle(assetManager: AssetManager): JSONArray{
+        val inputStream = assetManager.open("${TouristSpotData.touristSpotId}/map_style.json")
         val style = inputStream.bufferedReader().use { it.readText() }
         return JSONArray(style)
     }
@@ -90,12 +91,13 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         }
 
         //後でまえのFragmentからIDを受け取るように変更
-        val touristSpotId = "kenrokuen"
+        val touristSpotId = "yamanaka_onsen"
+        TouristSpotData.touristSpotId = touristSpotId
         CoroutineScope(Dispatchers.IO).launch {
             val assetManager = requireContext().assets
-            val mapConfig = loadMapConfig(assetManager, touristSpotId)
+            val mapConfig = loadMapConfig(assetManager)
             googleMapMarker = GoogleMapMarker(requireContext(), mMap, touristSpotId, assetManager)
-            val mapStyle = loadMapStyle(assetManager,touristSpotId)
+            val mapStyle = loadMapStyle(assetManager)
             withContext(Dispatchers.Main) {
                 val success = mMap.setMapStyle(MapStyleOptions(mapStyle.toString()))
 
