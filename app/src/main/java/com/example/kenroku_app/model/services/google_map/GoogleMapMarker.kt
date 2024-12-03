@@ -2,6 +2,7 @@ package com.example.kenroku_app.model.services.google_map
 
 import android.content.Context
 import android.content.res.AssetManager
+import android.content.res.Resources
 import android.media.MediaPlayer
 import android.util.Log
 import android.widget.Toast
@@ -51,6 +52,12 @@ class GoogleMapMarker(
             val name = jsonData.getString("name")
             //val iconColor = jsonData.getString("icon")
             val resourceText = context.resources.getIdentifier("${touristSpotId}_${name}", "string", context.packageName)
+            //文字列リソースの確認
+            try {
+                println(context.getString(resourceText)) // 正常に取得できた場合の処理
+            } catch (e: Resources.NotFoundException) {
+                Log.e("ResourceError", "リソースが見つかりません: ${touristSpotId}_${name}", e)
+            }
             MarkerData.markerPosition.add(latLng)
             MarkerData.markerOptionList.add(
                 MarkerOptions()

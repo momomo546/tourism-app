@@ -9,12 +9,12 @@
     <string name="yamanaka_onsen_katsurashimizu">桂清水</string>
     <string name="yamanaka_onsen_bashodo">芭蕉堂</string>
     <string name="yamanaka_onsen_hakusanjinja">白山神社</string>
-    <string name="yamanaka_onsen_kokubusan">国分山 医王寺</string>
-    <string name="yamanaka_onsen_kakusenkei">鶴仙渓 川床</string>
+    <string name="yamanaka_onsen_kokubusan_ioji">国分山 医王寺</string>
+    <string name="yamanaka_onsen_kakusenkei_kawadoko">鶴仙渓 川床</string>
     <string name="yamanaka_onsen_mitsumataosugi">三又大杉</string>
     <string name="yamanaka_onsen_bashonoyakata">芭蕉の館</string>
     <string name="yamanaka_onsen_tokushojinotsubakishimizu">徳正寺の椿清水</string>
-    <string name="yamanaka_onsen_kogeinoyakata">工芸の館（ろくろの里）</string>
+    <string name="yamanaka_onsen_kogeinoyakata_rokuronosato">工芸の館（ろくろの里）</string>
     <string name="yamanaka_onsen_hasebejinja">長谷部神社</string>
     <string name="yamanaka_onsen_mugenan">無限庵</string>
 </resources>
