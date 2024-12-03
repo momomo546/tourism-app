@@ -1,10 +1,8 @@
 package com.example.kenroku_app.model.services.gps.actions
 
 import android.content.Context
-import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.AchieveData
 import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
@@ -32,7 +30,6 @@ class CheckPointFlagCheck(context: Context) {
         if(distance<AREA) {
             if (googleMapMarker != null && !AchieveData.checkPointFlag[index]) {
                 googleMapMarker.removeMarker(index)
-                googleMapMarker.markerList[index].icon(BitmapDescriptorFactory.fromResource(R.drawable.check_mark))
                 googleMapMarker.resetMarker(index)
             }
             checkPointFlag[index] = true
