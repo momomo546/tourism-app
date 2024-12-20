@@ -83,13 +83,8 @@ class GoogleMapMarker(
         }
     }
 
-    fun removeMarker(index:Int){
-        addMarkerMap[index]?.remove()
-    }
-
     fun resetMarker(index:Int){
-        MarkerData.markerOptionList[index].icon(BitmapDescriptorFactory.fromResource(R.drawable.check_mark))
-        addMarkerMap[index] = mMap.addMarker(MarkerData.markerOptionList[index])
+        addMarkerMap[index]?.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.check_mark))
         val mediaPlayer = MediaPlayer.create(context, R.raw.rappa)
         mediaPlayer.start()
         val toast = Toast.makeText(context, MarkerData.markerOptionList[index].title+"を通過しました！", Toast.LENGTH_LONG)

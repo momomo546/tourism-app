@@ -29,7 +29,6 @@ class CheckPointFlagCheck(context: Context) {
     fun checkCheckPointFlag(index: Int, distance: Float, googleMapMarker: GoogleMapMarker?) {
         if(distance<AREA) {
             if (googleMapMarker != null && !AchieveData.checkPointFlag[index]) {
-                googleMapMarker.removeMarker(index)
                 googleMapMarker.resetMarker(index)
             }
             checkPointFlag[index] = true
