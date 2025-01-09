@@ -2,6 +2,7 @@ package com.example.kenroku_app.model.services.gps.actions
 
 import android.content.Context
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.TouristSpotData.Companion.touristSpotId
 import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -14,11 +15,17 @@ class CheckPointFlagCheck(context: Context) {
 
     private val AREA = 15
     private var checkPointFlag = MutableList(27) { false }
+    private val fileString = "${touristSpotId}_checkPointFlag"
 
     init {
-        val jsonFlag = sharedPreferences.getString("checkPointFlag", "")
+        val jsonFlag = sharedPreferences.getString(fileString, "")
         checkPointFlag = if (jsonFlag == ""){
-            MutableList(27){ false }
+            if(touristSpotId=="kenrokuen"){
+                MutableList(27){ false }
+            }else{
+                MutableList(17){ false }
+            }
+
         } else {
             val type = object : TypeToken<MutableList<Boolean>>() {}.type
             gson.fromJson(jsonFlag, type) ?: mutableListOf()
@@ -35,7 +42,7 @@ class CheckPointFlagCheck(context: Context) {
             AchieveData.checkPointFlag = checkPointFlag
 
             val json = gson.toJson(checkPointFlag)
-            editor.putString("checkPointFlag", json)
+            editor.putString(fileString, json)
             editor.apply()
         }
     }

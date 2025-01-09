@@ -3,6 +3,7 @@ package com.example.kenroku_app.model.services.gps.actions
 import android.content.Context
 import android.util.Log
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.TouristSpotData.Companion.touristSpotId
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import java.util.Calendar
@@ -13,10 +14,11 @@ class SeasonFlagCheck(private val context: Context, private val callback: (Strin
     private val editor = sharedPreferences.edit()
     private val gson = Gson()
 
+    private val fileString = "${touristSpotId}_checkPointFlag"
     private var seasonFlag = MutableList(4){ false }
 
     init {
-        val jsonFlag = sharedPreferences.getString("seasonFlag", "")
+        val jsonFlag = sharedPreferences.getString(fileString, "")
         seasonFlag = if (jsonFlag == "") {
             MutableList(4) { false }
         } else {

@@ -7,6 +7,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.TouristSpotData.Companion.touristSpotId
 import com.example.kenroku_app.viewmodel.activity.MainViewModel
 
 class StepCounter(
@@ -21,7 +22,7 @@ class StepCounter(
 
     private val sharedPreferences = context.getSharedPreferences("padometor", Context.MODE_PRIVATE)
     private val editor = sharedPreferences.edit()
-    private var steps = sharedPreferences.getInt("step", 0)
+    private var steps = sharedPreferences.getInt("${touristSpotId}_step", 0)
 
     init {
         if (mStepDetectorSensor == null) {
@@ -30,6 +31,7 @@ class StepCounter(
         if (mStepConterSensor == null) {
             Log.e("StepCounter", "Step Counter Sensor is not available!")
         }
+        AchieveData.steps = steps
     }
 
     override fun onSensorChanged(event: SensorEvent) {

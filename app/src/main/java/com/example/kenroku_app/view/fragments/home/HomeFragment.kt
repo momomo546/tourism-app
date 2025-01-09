@@ -50,7 +50,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(this)
-        Log.d("debug", "onViewCreated")
     }
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -67,7 +66,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         }
 
         //後でまえのFragmentからIDを受け取るように変更
-        val touristSpotId = "yamanaka_onsen"
+        val touristSpotId = "kenrokuen"
         TouristSpotData.touristSpotId = touristSpotId
         CoroutineScope(Dispatchers.IO).launch {
             val assetManager = requireContext().assets

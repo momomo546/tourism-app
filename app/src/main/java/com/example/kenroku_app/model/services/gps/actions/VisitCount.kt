@@ -2,6 +2,7 @@ package com.example.kenroku_app.model.services.gps.actions
 
 import android.content.Context
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.TouristSpotData.Companion.touristSpotId
 import java.util.Calendar
 
 
@@ -10,7 +11,7 @@ class VisitCount(private val context: Context){
     private val sharedPreferences = context.getSharedPreferences("VisitCount", Context.MODE_PRIVATE)
     private val editor = sharedPreferences.edit()
 
-    private var count = sharedPreferences.getInt("count", 0)
+    private var count = sharedPreferences.getInt("${touristSpotId}_count", 0)
     private var year = sharedPreferences.getInt("year", 2000)
     private var month = sharedPreferences.getInt("month", 1)
     private var date = sharedPreferences.getInt("date", 1)
