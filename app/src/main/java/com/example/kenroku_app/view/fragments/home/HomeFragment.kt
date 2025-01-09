@@ -2,7 +2,6 @@ package com.example.kenroku_app.view.fragments.home
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.content.res.AssetManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,9 +28,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
-import org.json.JSONObject
-import java.io.IOException
 
 class HomeFragment : Fragment(), OnMapReadyCallback{
     private val homeViewModel: HomeViewModel by viewModels()
@@ -40,24 +36,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     private var isStart = false
     private lateinit var googleMapMarker: GoogleMapMarker
 
-    // 指定された観光地IDに基づいて設定を読み込む
-    private fun loadMapConfig(assetManager: AssetManager): JSONObject {
-        val fileName = "${TouristSpotData.touristSpotId}/map_setting.json"
-       try {
-            val inputStream = assetManager.open(fileName)
-            val jsonString = inputStream.bufferedReader().use { it.readText() }
-            return JSONObject(jsonString)
-        } catch (e: IOException) {
-            Log.e("loadMapConfig", "ファイルが見つかりません: $fileName", e)
-            return JSONObject()
-        }
-    }
-    private fun loadMapStyle(assetManager: AssetManager): JSONArray{
-        val inputStream = assetManager.open("${TouristSpotData.touristSpotId}/map_style.json")
-        val style = inputStream.bufferedReader().use { it.readText() }
-        return JSONArray(style)
-    }
-
     // Fragmentで表示するViewを作成するメソッド
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,8 +43,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        // 先ほどのレイアウトをここでViewとして作成します
-        Log.d("debug", "onCreateView")
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
@@ -95,9 +71,9 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         TouristSpotData.touristSpotId = touristSpotId
         CoroutineScope(Dispatchers.IO).launch {
             val assetManager = requireContext().assets
-            val mapConfig = loadMapConfig(assetManager)
+            val mapConfig = homeViewModel.loadMapConfig(assetManager)
             googleMapMarker = GoogleMapMarker(requireContext(), mMap, touristSpotId, assetManager)
-            val mapStyle = loadMapStyle(assetManager)
+            val mapStyle = homeViewModel.loadMapStyle(assetManager)
             withContext(Dispatchers.Main) {
                 val success = mMap.setMapStyle(MapStyleOptions(mapStyle.toString()))
 

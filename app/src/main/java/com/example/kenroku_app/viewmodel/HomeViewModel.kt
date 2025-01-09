@@ -1,5 +1,7 @@
 package com.example.kenroku_app.viewmodel
 
+import android.content.res.AssetManager
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.TouristSpotData
@@ -10,13 +12,33 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.GroundOverlayOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
+import org.json.JSONArray
 import org.json.JSONObject
+import java.io.IOException
 
 class HomeViewModel : ViewModel() {
 
     private lateinit var mMap: GoogleMap
 
     private lateinit var _mapConfig: JSONObject
+
+    // 指定された観光地IDに基づいて設定を読み込む
+    fun loadMapConfig(assetManager: AssetManager): JSONObject {
+        val fileName = "${TouristSpotData.touristSpotId}/map_setting.json"
+        try {
+            val inputStream = assetManager.open(fileName)
+            val jsonString = inputStream.bufferedReader().use { it.readText() }
+            return JSONObject(jsonString)
+        } catch (e: IOException) {
+            Log.e("loadMapConfig", "ファイルが見つかりません: $fileName", e)
+            return JSONObject()
+        }
+    }
+    fun loadMapStyle(assetManager: AssetManager): JSONArray {
+        val inputStream = assetManager.open("${TouristSpotData.touristSpotId}/map_style.json")
+        val style = inputStream.bufferedReader().use { it.readText() }
+        return JSONArray(style)
+    }
 
     fun initializeMap(googleMap: GoogleMap) {
         mMap = googleMap
