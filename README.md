@@ -2,6 +2,8 @@
 ## 概要
 研究で開発している観光アプリです。  
 ゲーミフィケーションの効果を利用し、再訪促進を目指す観光アプリ開発を行っています。 
+研究で開発した「まわりみち兼六園」というアプリを発展させ、現在は兼六園より大きな規模の様々な観光地でも利用できるようなアプリを目指して開発中です。  
+回り道兼六園のリポジトリは[こちら](https://github.com/momomo546/kenrokuapp)
 論文はこちらから
 - [Development of mobile application to promote revisits to Kenrokuen using gamification theory](https://doi.org/10.37020/jgtr.9.1_67)
 - [Verification of effect for tourism application ‘Mawari-michi Kenrokuen’ using gamification](https://doi.org/10.37020/jgtr.9.2_103)
@@ -12,7 +14,7 @@
 
 ## 使用技術
 - Kotlin
-- Android Studio
+- Android Studio Koala | 2024.1.2
 - Google Maps API
 
 ## 機能一覧
