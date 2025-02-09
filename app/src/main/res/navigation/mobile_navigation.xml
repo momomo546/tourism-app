@@ -3,16 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_select_map">
+
+    <fragment
+        android:id="@+id/navigation_select_map"
+        android:name="com.example.kenroku_app.view.fragments.selectMap.SelectMapFragment"
+        android:label="@string/title_select_map"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_select_map_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.kenroku_app.view.fragments.home.HomeFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_home" >
+        <argument
+            android:name="content"
+            app:argType="string"/>
         <action
             android:id="@+id/action_navigation_home_to_markerDetailFragment"
-            app:destination="@id/markerDetailFragment" />
+            app:destination="@id/navigation_marker_detail" />
     </fragment>
 
     <fragment
@@ -28,8 +41,8 @@
         tools:layout="@layout/fragment_notifications" />
 
     <fragment
-        android:id="@+id/markerDetailFragment"
-        android:name="com.example.kenroku_app.view.fragments.MarkerDetailFragment"
-        android:label="MarkerDetailFragment"
+        android:id="@+id/navigation_marker_detail"
+        android:name="com.example.kenroku_app.view.fragments.home.MarkerDetailFragment"
+        android:label="@string/title_marker_detail_fragment"
         tools:layout="@layout/fragment_marker_detail"/>
 </navigation>

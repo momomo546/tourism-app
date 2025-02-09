@@ -1,4 +1,4 @@
-package com.example.kenroku_app.view.fragments
+package com.example.kenroku_app.view.fragments.home
 
 import android.os.Bundle
 import android.view.LayoutInflater

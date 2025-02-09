@@ -3,6 +3,8 @@
     <string name="title_home">Home</string>
     <string name="title_achieve">Achieve</string>
     <string name="title_notifications">Information</string>
+    <string name="title_select_map">観光地選択</string>
+    <string name="title_marker_detail_fragment">詳細情報</string>
     <string name="select_map">観光地を選択してください!</string>
 
     <string name="checkpoint">チェックポイントの数</string>

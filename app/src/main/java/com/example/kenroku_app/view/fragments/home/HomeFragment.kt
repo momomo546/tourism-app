@@ -7,27 +7,28 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.MarkerData
 import com.example.kenroku_app.model.repositories.data.TouristSpotData
 import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
-import com.example.kenroku_app.view.fragments.MarkerDetailFragment
 import com.example.kenroku_app.viewmodel.HomeViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.Marker
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONArray
+import org.json.JSONObject
 
 class HomeFragment : Fragment(), OnMapReadyCallback{
     private val homeViewModel: HomeViewModel by viewModels()
@@ -35,6 +36,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     private lateinit var mMap: GoogleMap
     private var isStart = false
     private lateinit var googleMapMarker: GoogleMapMarker
+    private val args: HomeFragmentArgs by navArgs()
 
     // Fragmentで表示するViewを作成するメソッド
     override fun onCreateView(
@@ -65,26 +67,35 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
             mMap.isMyLocationEnabled = true
         }
 
-        //後でまえのFragmentからIDを受け取るように変更
-        val touristSpotId = "kenrokuen"
-        TouristSpotData.touristSpotId = touristSpotId
-        CoroutineScope(Dispatchers.IO).launch {
+        val touristSpotId = args.content
+
+        lifecycleScope.launch {
             val assetManager = requireContext().assets
-            val mapConfig = homeViewModel.loadMapConfig(assetManager)
-            googleMapMarker = GoogleMapMarker(requireContext(), mMap, touristSpotId, assetManager)
-            val mapStyle = homeViewModel.loadMapStyle(assetManager)
-            withContext(Dispatchers.Main) {
-                val success = mMap.setMapStyle(MapStyleOptions(mapStyle.toString()))
 
-                if (!success) {
-                    Log.e("MapStyle", "スタイルの適用に失敗しました。")
-                }
-                homeViewModel.setMapConfig(mapConfig)
-                homeViewModel.initializeMap(googleMap)
+            // 非同期でデータを取得
+            val mapConfig: JSONObject
+            val mapStyle: JSONArray
+            val googleMapMarker: GoogleMapMarker
 
-                googleMapMarker.addMarker()
-                MarkerData.googleMapMarker = googleMapMarker
+            withContext(Dispatchers.IO) {
+                TouristSpotData.touristSpotId = touristSpotId
+                mapConfig = homeViewModel.loadMapConfig(assetManager)
+                mapStyle = homeViewModel.loadMapStyle(assetManager)
+
+                googleMapMarker = GoogleMapMarker(requireContext(), mMap, touristSpotId, assetManager)
             }
+
+            // UI更新 (Mainスレッド)
+            val success = mMap.setMapStyle(MapStyleOptions(mapStyle.toString()))
+            if (!success) {
+                Log.e("MapStyle", "スタイルの適用に失敗しました。")
+            }
+
+            homeViewModel.setMapConfig(mapConfig)
+            homeViewModel.initializeMap(googleMap)
+
+            googleMapMarker.addMarker()
+            MarkerData.googleMapMarker = googleMapMarker
         }
 
         // 情報ウィンドウの設定
@@ -97,7 +108,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
                 val customInfoWindow = layoutInflater.inflate(R.layout.custom_info_window, null)
 
                 val titleTextView = customInfoWindow.findViewById<TextView>(R.id.titleTextView)
-                val detailButton = customInfoWindow.findViewById<Button>(R.id.detailButton)
+//                val detailButton = customInfoWindow.findViewById<Button>(R.id.detailButton)
 
                 titleTextView.text = marker.title
 
