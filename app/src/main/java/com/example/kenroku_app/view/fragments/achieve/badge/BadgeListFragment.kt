@@ -29,7 +29,7 @@ class BadgeListFragment : Fragment() {
         recyclerView.layoutManager = linearLayoutManager
 
         badgeListViewModel.badgeList.observe(viewLifecycleOwner) {badgeList ->
-            val adapter = BadgeAdapter(badgeList)
+            val adapter = BadgeAdapter(requireContext(), badgeList)
             recyclerView.adapter = adapter
             recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, linearLayoutManager.orientation))
         }

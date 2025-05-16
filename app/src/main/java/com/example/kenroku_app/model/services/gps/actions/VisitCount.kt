@@ -2,6 +2,7 @@ package com.example.kenroku_app.model.services.gps.actions
 
 import android.content.Context
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.AchieveDataStore
 import com.example.kenroku_app.model.repositories.data.TouristSpotData.Companion.touristSpotId
 import java.util.Calendar
 
@@ -15,17 +16,23 @@ class VisitCount(private val context: Context){
     private var year = sharedPreferences.getInt("year", 2000)
     private var month = sharedPreferences.getInt("month", 1)
     private var date = sharedPreferences.getInt("date", 1)
+    private val achieveData: AchieveData
+        get() = requireNotNull(AchieveDataStore.currentAchieveData) {
+            "AchieveDataStore.currentAchieveData が null です。先に load() を呼んでください。"
+        }
 
-    init{
-        AchieveData.visitCount = count
-    }
+
+//    init{
+//        AchieveData.visitCount = count
+//    }
 
     fun add(){
         if (isVisitCount()) {
-            count++
-            editor.putInt("count", count)
-            editor.apply()
-            AchieveData.visitCount = count
+//            count++
+//            editor.putInt("count", count)
+//            editor.apply()
+            achieveData.visitCount++
+            AchieveDataStore.save(context,touristSpotId)
         }
     }
 

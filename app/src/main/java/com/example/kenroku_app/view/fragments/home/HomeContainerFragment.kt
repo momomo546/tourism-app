@@ -44,7 +44,7 @@ class HomeContainerFragment : Fragment() {
 //                navController.navigate(R.id.action_navigation_select_map_to_navigation_home)
             }
             HomeContainerViewModel.HomeState.MAIN -> {
-                navController.navigate(R.id.action_navigation_select_map_to_navigation_home)
+//                navController.navigate(R.id.action_navigation_select_map_to_navigation_home)
             }
             HomeContainerViewModel.HomeState.DETAIL -> {
                 navController.navigate(R.id.action_navigation_home_to_markerDetailFragment)

@@ -1,5 +1,6 @@
 package com.example.kenroku_app.view.fragments.achieve.badge
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,11 +9,17 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.AchieveDataStore
 
 //BadgeDataには(R.drawable.xxx,R.string.xxx)のようにバッジ獲得後に表示する画像とテキストのIDを入れる
 data class BadgeData(val imageResId: Int, val textId: Int)
 
-class BadgeAdapter (private val data: List<BadgeData>) : RecyclerView.Adapter<BadgeAdapter.ViewHolder>() {
+class BadgeAdapter (val context: Context, val data: List<BadgeData>) : RecyclerView.Adapter<BadgeAdapter.ViewHolder>() {
+    private val achieveData: AchieveData
+        get() = requireNotNull(AchieveDataStore.currentAchieveData) {
+            "AchieveDataStore.currentAchieveData が null です。先に load() を呼んでください。"
+        }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         //fragment_badge.xmlのレイアウトを取得
         val view = LayoutInflater.from(parent.context).inflate(R.layout.fragment_badge, parent, false)
@@ -22,7 +29,7 @@ class BadgeAdapter (private val data: List<BadgeData>) : RecyclerView.Adapter<Ba
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = data[position]
         //Badgeの取得状況をbool値で保存してあり、これを利用
-        if (AchieveData.seasonFlag[position]) {
+        if (achieveData.seasonFlag[position]) {
             //trueのときはバッジの画像を表示
             holder.imageView.setImageResource(item.imageResId)
         } else {

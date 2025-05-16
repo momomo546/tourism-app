@@ -13,6 +13,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.kenroku_app.R
 import com.example.kenroku_app.databinding.ActivityMainBinding
+import com.example.kenroku_app.model.repositories.data.AchieveDataStore
 import com.example.kenroku_app.viewmodel.activity.MainViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
@@ -29,8 +30,12 @@ class MainActivity : AppCompatActivity(){
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val touristName = intent.getStringExtra("tourist_name")
+
+        AchieveDataStore.load(this,touristName ?: "")
 
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel.setTouristSpotId(touristName ?: "")
 
         // コールバックの設定
         viewModel.setOnPopUpCallback { message ->

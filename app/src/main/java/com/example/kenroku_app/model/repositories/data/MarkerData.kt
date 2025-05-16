@@ -7,6 +7,12 @@ import java.util.Vector
 
 class MarkerData {
     companion object {
+        fun clearMarker() {
+            markerPosition.clear()
+            markerOptionList.clear()
+            googleMapMarker = null
+        }
+
         var markerPosition: Vector<LatLng> = Vector()
         var markerOptionList: Vector<MarkerOptions> = Vector()
 

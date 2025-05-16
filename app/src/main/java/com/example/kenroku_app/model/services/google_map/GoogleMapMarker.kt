@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.AchieveDataStore
 import com.example.kenroku_app.model.repositories.data.MarkerData
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
@@ -22,11 +23,16 @@ import java.io.InputStreamReader
 class GoogleMapMarker(
     val context: Context,
     val mMap: GoogleMap,
-    touristSpotId: String,
+    val touristSpotId: String,
     assetManager: AssetManager
 ) {
     //表示されているマーカーのマップ
     private var addMarkerMap: MutableMap<Int,Marker?> = mutableMapOf()
+    private val achieveData: AchieveData
+        get() = requireNotNull(AchieveDataStore.currentAchieveData) {
+            "AchieveDataStore.currentAchieveData が null です。先に load() を呼んでください。"
+        }
+
 
     init{
         loadMarkerConfig(touristSpotId,assetManager)
@@ -71,7 +77,7 @@ class GoogleMapMarker(
 
     fun addMarker(){
         for ((index, value) in MarkerData.markerOptionList.withIndex()) {
-            if (AchieveData.checkPointFlag[index]) value.icon(
+            if (achieveData.checkPointFlag[index]) value.icon(
                 BitmapDescriptorFactory.fromResource(
                     R.drawable.check_mark
                 )

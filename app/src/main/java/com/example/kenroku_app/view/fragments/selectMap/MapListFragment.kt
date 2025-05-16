@@ -1,17 +1,17 @@
 package com.example.kenroku_app.view.fragments.selectMap
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.kenroku_app.databinding.FragmentBadgeListBinding
-import com.example.kenroku_app.model.repositories.data.TouristSpotData
+import com.example.kenroku_app.view.activities.MainActivity
 import com.example.kenroku_app.viewmodel.MapListViewModel
 
 class MapListFragment : Fragment() {
@@ -32,10 +32,9 @@ class MapListFragment : Fragment() {
 
         mapListViewModel.mapList.observe(viewLifecycleOwner) {mapList ->
             val adapter = MapAdapter(mapList) { touristName ->
-                TouristSpotData.touristSpotId = touristName
-                val action = SelectMapFragmentDirections
-                    .actionNavigationSelectMapToNavigationHome(touristName)
-                findNavController().navigate(action)
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                intent.putExtra("tourist_name", touristName)
+                startActivity(intent)
             }
             recyclerView.adapter = adapter
             recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, linearLayoutManager.orientation))

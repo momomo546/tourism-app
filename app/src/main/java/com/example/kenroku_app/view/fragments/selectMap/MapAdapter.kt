@@ -11,7 +11,7 @@ import com.example.kenroku_app.R
 data class MapData(val imageResId: Int, val textId: Int, val mapPath: String)
 
 class MapAdapter (
-    private val data: List<MapData>,
+    private val mapData: List<MapData>,
     private val onItemClick: (String) -> Unit
 ) : RecyclerView.Adapter<MapAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -21,7 +21,7 @@ class MapAdapter (
     }
 
     override fun onBindViewHolder(holder: ViewHolder, index: Int) {
-        val item = data[index]
+        val item = mapData[index]
 
         holder.imageView.setImageResource(item.imageResId)
         holder.textView.setText(item.textId)
@@ -29,7 +29,7 @@ class MapAdapter (
     }
 
     override fun getItemCount(): Int {
-        return data.size
+        return mapData.size
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

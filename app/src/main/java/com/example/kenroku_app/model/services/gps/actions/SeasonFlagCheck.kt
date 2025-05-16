@@ -3,29 +3,33 @@ package com.example.kenroku_app.model.services.gps.actions
 import android.content.Context
 import android.util.Log
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.AchieveDataStore
 import com.example.kenroku_app.model.repositories.data.TouristSpotData.Companion.touristSpotId
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import java.util.Calendar
 
 class SeasonFlagCheck(private val context: Context, private val callback: (String) -> Unit) {
     // 変数保存
     private val sharedPreferences = context.getSharedPreferences("seasonFlag", Context.MODE_PRIVATE)
-    private val editor = sharedPreferences.edit()
-    private val gson = Gson()
+//    private val editor = sharedPreferences.edit()
+//    private val gson = Gson()
 
     private val fileString = "${touristSpotId}_checkPointFlag"
     private var seasonFlag = MutableList(4){ false }
+    private val achieveData: AchieveData
+        get() = requireNotNull(AchieveDataStore.currentAchieveData) {
+            "AchieveDataStore.currentAchieveData が null です。先に load() を呼んでください。"
+        }
 
     init {
-        val jsonFlag = sharedPreferences.getString(fileString, "")
-        seasonFlag = if (jsonFlag == "") {
-            MutableList(4) { false }
-        } else {
-            val type = object : TypeToken<MutableList<Boolean>>() {}.type
-            gson.fromJson(jsonFlag, type) ?: mutableListOf()
-        }
-        AchieveData.seasonFlag = seasonFlag
+        seasonFlag = achieveData.seasonFlag.toMutableList()
+//        val jsonFlag = sharedPreferences.getString(fileString, "")
+//        seasonFlag = if (jsonFlag == "") {
+//            MutableList(4) { false }
+//        } else {
+//            val type = object : TypeToken<MutableList<Boolean>>() {}.type
+//            gson.fromJson(jsonFlag, type) ?: mutableListOf()
+//        }
+//        achieveData.seasonFlag = seasonFlag
     }
 
     private fun getCurrentMonth(): Int {
@@ -36,34 +40,42 @@ class SeasonFlagCheck(private val context: Context, private val callback: (Strin
     fun checkSeasonFlag() {
         val month = getCurrentMonth()
         if(month in 3..5) {
-            if(!seasonFlag[0]){
+            if(!achieveData.seasonFlag[0]){
                 seasonFlag[0] = true
                 callback("春バッジを獲得しました。")
+                achieveData.seasonFlag = seasonFlag.toList()
+                AchieveDataStore.save(context,touristSpotId)
             }
         }
         else if(month in 6..8) {
-            if(!seasonFlag[1]){
+            if(!achieveData.seasonFlag[1]){
                 seasonFlag[1] = true
                 callback("夏バッジを獲得しました。")
+                achieveData.seasonFlag = seasonFlag.toList()
+                AchieveDataStore.save(context,touristSpotId)
             }
         }
         else if(month in 9..11) {
-            if(!seasonFlag[2]){
+            if(!achieveData.seasonFlag[2]){
                 seasonFlag[2] = true
                 callback("秋バッジを獲得しました。")
+                achieveData.seasonFlag = seasonFlag.toList()
+                AchieveDataStore.save(context,touristSpotId)
             }
         }
         else {
-            if(!seasonFlag[3]){
+            if(!achieveData.seasonFlag[3]){
                 seasonFlag[3] = true
                 callback("冬バッジを獲得しました。")
+                achieveData.seasonFlag = seasonFlag.toList()
+                AchieveDataStore.save(context,touristSpotId)
             }
         }
 
-        AchieveData.seasonFlag = seasonFlag
-        val json = gson.toJson(seasonFlag)
-        editor.putString("seasonFlag", json)
-        editor.apply()
+//        achieveData.seasonFlag = seasonFlag
+//        val json = gson.toJson(seasonFlag)
+//        editor.putString("seasonFlag", json)
+//        editor.apply()
     }
 
     fun check() {

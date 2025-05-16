@@ -12,11 +12,13 @@ import com.example.kenroku_app.R
 import com.example.kenroku_app.databinding.FragmentAchieveBinding
 import com.example.kenroku_app.view.fragments.achieve.badge.BadgeListFragment
 import com.example.kenroku_app.viewmodel.AchieveViewModel
+import com.example.kenroku_app.viewmodel.activity.MainViewModel
 
 class AchieveFragment : Fragment() {
 
     private var _binding: FragmentAchieveBinding? = null
     private lateinit var achieveViewModel: AchieveViewModel
+    private lateinit var mainViewModel: MainViewModel
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,6 +27,7 @@ class AchieveFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         achieveViewModel = ViewModelProvider(this)[AchieveViewModel::class.java]
+        mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         _binding = FragmentAchieveBinding.inflate(inflater, container, false)
         val root: View = binding.root

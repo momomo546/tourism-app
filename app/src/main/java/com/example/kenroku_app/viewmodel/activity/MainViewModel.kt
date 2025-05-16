@@ -22,8 +22,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _message = MutableLiveData<String>()
     private val _steps = MutableLiveData<Int>()
+    private val _touristSpotId = MutableLiveData<String>()
     val steps: LiveData<Int> get() = _steps
     val message: LiveData<String> get() = _message
+    val touristSpotId: LiveData<String> get() = _touristSpotId
     var isLocation = false
     private var onPopUpCallback: ((String) -> Unit)? = null
 
@@ -49,11 +51,11 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         mediaPlayer.start()
     }
 
-    fun updateVisitCount() {
+    private fun updateVisitCount() {
         visitCount.add()
     }
 
-    fun checkPointCheck() {
+    private fun checkPointCheck() {
         val seasonFlagCheck = SeasonFlagCheck(context) { message ->
             // 位置情報の更新があったときの処理
             onPopUpCallback?.invoke(message)
@@ -89,5 +91,9 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun stopLocationUpdates() {
         gpsManager.unregisterGpsUpdates()
+    }
+
+    fun setTouristSpotId(value: String) {
+        _touristSpotId.value = value
     }
 }

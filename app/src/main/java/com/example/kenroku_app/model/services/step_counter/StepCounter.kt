@@ -7,11 +7,12 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.util.Log
 import com.example.kenroku_app.model.repositories.data.AchieveData
+import com.example.kenroku_app.model.repositories.data.AchieveDataStore
 import com.example.kenroku_app.model.repositories.data.TouristSpotData.Companion.touristSpotId
 import com.example.kenroku_app.viewmodel.activity.MainViewModel
 
 class StepCounter(
-    private val context: Context,
+    val context: Context,
     private val viewModel: MainViewModel,
     private val onStepDetected: (Int) -> Unit
 ) : SensorEventListener {
@@ -23,16 +24,21 @@ class StepCounter(
     private val sharedPreferences = context.getSharedPreferences("padometor", Context.MODE_PRIVATE)
     private val editor = sharedPreferences.edit()
     private var steps = sharedPreferences.getInt("${touristSpotId}_step", 0)
+    private val achieveData: AchieveData
+        get() = requireNotNull(AchieveDataStore.currentAchieveData) {
+            "AchieveDataStore.currentAchieveData が null です。先に load() を呼んでください。"
+        }
 
-    init {
-        if (mStepDetectorSensor == null) {
-            Log.e("StepCounter", "Step Detector Sensor is not available!")
-        }
-        if (mStepConterSensor == null) {
-            Log.e("StepCounter", "Step Counter Sensor is not available!")
-        }
-        AchieveData.steps = steps
-    }
+
+//    init {
+//        if (mStepDetectorSensor == null) {
+//            Log.e("StepCounter", "Step Detector Sensor is not available!")
+//        }
+//        if (mStepConterSensor == null) {
+//            Log.e("StepCounter", "Step Counter Sensor is not available!")
+//        }
+//        AchieveData.steps = steps
+//    }
 
     override fun onSensorChanged(event: SensorEvent) {
         if(!viewModel.isLocation) return
@@ -43,10 +49,11 @@ class StepCounter(
             // sensor からの値を取得するなどの処理を行う
             Log.d("type_step_counter", values[0].toString())
         }
-        steps++
-        AchieveData.steps = steps
-        editor.putInt("step", steps)
-        editor.apply()
+//        steps++
+        achieveData.steps++
+        AchieveDataStore.save(context,touristSpotId)
+//        editor.putInt("step", steps)
+//        editor.apply()
         onStepDetected(steps)
     }
 

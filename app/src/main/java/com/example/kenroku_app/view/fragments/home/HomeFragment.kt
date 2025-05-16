@@ -10,15 +10,16 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.MarkerData
 import com.example.kenroku_app.model.repositories.data.TouristSpotData
 import com.example.kenroku_app.model.services.google_map.GoogleMapMarker
 import com.example.kenroku_app.viewmodel.HomeViewModel
+import com.example.kenroku_app.viewmodel.activity.MainViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
@@ -36,7 +37,6 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
     private lateinit var mMap: GoogleMap
     private var isStart = false
     private lateinit var googleMapMarker: GoogleMapMarker
-    private val args: HomeFragmentArgs by navArgs()
 
     // Fragmentで表示するViewを作成するメソッド
     override fun onCreateView(
@@ -67,7 +67,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
             mMap.isMyLocationEnabled = true
         }
 
-        val touristSpotId = args.content
+        val mainViewModel: MainViewModel by activityViewModels()
+        val touristSpotId = mainViewModel.touristSpotId.value ?: "kenrokuen"
 
         lifecycleScope.launch {
             val assetManager = requireContext().assets
@@ -78,6 +79,10 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
             val googleMapMarker: GoogleMapMarker
 
             withContext(Dispatchers.IO) {
+                if(TouristSpotData.touristSpotId != touristSpotId){
+                    MarkerData.clearMarker()
+                    Log.d("debug","マーカーをクリアしました。")
+                }
                 TouristSpotData.touristSpotId = touristSpotId
                 mapConfig = homeViewModel.loadMapConfig(assetManager)
                 mapStyle = homeViewModel.loadMapStyle(assetManager)
@@ -94,6 +99,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
             homeViewModel.setMapConfig(mapConfig)
             homeViewModel.initializeMap(googleMap)
 
+//            if(TouristSpotData.touristSpotId != touristSpotId) googleMapMarker.addMarker()
             googleMapMarker.addMarker()
             MarkerData.googleMapMarker = googleMapMarker
         }
