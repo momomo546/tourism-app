@@ -70,7 +70,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private fun onLocation(location: Boolean) {
         // 位置情報が変わったときの処理
-        isLocation=location
+        isLocation = location
         if(!isLocation) return
         updateVisitCount()
         checkPointCheck()

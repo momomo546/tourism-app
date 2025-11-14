@@ -68,7 +68,7 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
         }
 
         val mainViewModel: MainViewModel by activityViewModels()
-        val touristSpotId = mainViewModel.touristSpotId.value ?: "kenrokuen"
+        val touristSpotId = mainViewModel.touristSpotId.value ?: "none"
 
         lifecycleScope.launch {
             val assetManager = requireContext().assets
@@ -79,10 +79,8 @@ class HomeFragment : Fragment(), OnMapReadyCallback{
             val googleMapMarker: GoogleMapMarker
 
             withContext(Dispatchers.IO) {
-                if(TouristSpotData.touristSpotId != touristSpotId){
-                    MarkerData.clearMarker()
-                    Log.d("debug","マーカーをクリアしました。")
-                }
+                MarkerData.clearMarker()
+                Log.d("debug","マーカーをクリアしました。")
                 TouristSpotData.touristSpotId = touristSpotId
                 mapConfig = homeViewModel.loadMapConfig(assetManager)
                 mapStyle = homeViewModel.loadMapStyle(assetManager)

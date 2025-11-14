@@ -1,6 +1,7 @@
 package com.example.kenroku_app.model.services.gps.actions
 
 import android.location.Location
+import android.util.Log
 import com.example.kenroku_app.model.repositories.data.TouristSpotData
 
 class LocationCheck(){
@@ -19,6 +20,7 @@ class LocationCheck(){
 //        val radius = 262
         val radius = TouristSpotData.radius
         val distance = userLocation.distanceTo(targetLocation)
+        Log.d("AchieveData_Location","$distance/$radius/${userLocation.latitude}/${userLocation.longitude}")
 
         return distance <= radius
     }

@@ -29,8 +29,12 @@ class MarkerDetailFragment : Fragment() {
         val touristSpotId = arguments?.getString("touristSpotId")
 
         // マーカーIDに対応するリソースIDをマップから取得
-        val resourceImg = getResources().getIdentifier("${touristSpotId}_img_${markerId}", "drawable", requireContext().packageName)
-        val resourceText = getResources().getIdentifier("detail_info_${markerId}", "string", requireContext().packageName)
+        var resourceImg = getResources().getIdentifier("${touristSpotId}_img_${markerId}", "drawable", requireContext().packageName)
+        if (resourceImg == 0) {
+            resourceImg = getResources().getIdentifier("no_image_yoko","drawable",requireContext().packageName)
+        }
+//        val resourceText = getResources().getIdentifier("detail_info_${markerId}", "string", requireContext().packageName)
+        val resourceText = getResources().getIdentifier("${touristSpotId}_detail_info_${markerId}", "string", requireContext().packageName)
 
         val photoImageView = view.findViewById<ImageView>(R.id.photoImageView)
         val textTextView = view.findViewById<TextView>(R.id.textTextView)

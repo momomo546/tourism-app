@@ -10,14 +10,17 @@ import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.ViewModelProvider
 import com.example.kenroku_app.R
 import com.example.kenroku_app.databinding.FragmentAchieveBinding
+import com.example.kenroku_app.model.repositories.data.TouristSpotData
 import com.example.kenroku_app.view.fragments.achieve.badge.BadgeListFragment
 import com.example.kenroku_app.viewmodel.AchieveViewModel
+import com.example.kenroku_app.viewmodel.PointsViewModel
 import com.example.kenroku_app.viewmodel.activity.MainViewModel
 
 class AchieveFragment : Fragment() {
 
     private var _binding: FragmentAchieveBinding? = null
     private lateinit var achieveViewModel: AchieveViewModel
+    private lateinit var pointsViewModel: PointsViewModel
     private lateinit var mainViewModel: MainViewModel
     private val binding get() = _binding!!
 
@@ -27,6 +30,7 @@ class AchieveFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         achieveViewModel = ViewModelProvider(this)[AchieveViewModel::class.java]
+        pointsViewModel = ViewModelProvider(this)[PointsViewModel::class.java]
         mainViewModel = ViewModelProvider(requireActivity())[MainViewModel::class.java]
 
         _binding = FragmentAchieveBinding.inflate(inflater, container, false)
@@ -43,6 +47,12 @@ class AchieveFragment : Fragment() {
         }
         achieveViewModel.visitCountText.observe(viewLifecycleOwner){
             visitCountView.text = it
+        }
+        if(TouristSpotData.touristSpotId == "yamanaka_onsen") {
+            val pointsFragment = PointsFragment()
+            val pointsTransaction: FragmentTransaction = childFragmentManager.beginTransaction()
+            pointsTransaction.add(R.id.fragment_container_points, pointsFragment)
+            pointsTransaction.commit()
         }
 
         val childFragment = BadgeListFragment()
@@ -62,17 +72,4 @@ class AchieveFragment : Fragment() {
         super.onResume()
         achieveViewModel.viewUpdate()
     }
-
-    /*fun viewUpdate(){
-        val listSize = MarkerData.checkPointFlag.size
-        val trueCount = MarkerData.checkPointFlag.count { it }
-        checkPointView.text = "$trueCount/$listSize"
-
-        val mainActivity = activity as MainActivity
-        val variableValue = MarkerData.steps
-        walkCountView.text = "$variableValue"
-
-        val visitCount = mainActivity.visitCount
-        visitCountView.text = "${visitCount.getVisitCount()}"
-    }*/
 }

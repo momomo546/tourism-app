@@ -12,14 +12,12 @@ import androidx.core.content.ContextCompat
 import com.example.kenroku_app.model.repositories.data.MarkerData
 import com.example.kenroku_app.model.services.gps.actions.CheckPointFlagCheck
 import com.example.kenroku_app.model.services.gps.actions.LocationCheck
-import com.example.kenroku_app.model.services.gps.actions.VisitCount
 
 class GPSManager(
     private val context: Context,
     private val onLocation: (Boolean) -> Unit
 ) {
     var isLocation = false
-    val visitCount = VisitCount(context)
     val checkPointFlagCheck = CheckPointFlagCheck(context)
     private val minTimeGpsCheck : Long = 1000
     private val minDistanceGpsCheck = 0f
@@ -34,7 +32,6 @@ class GPSManager(
             // 位置情報が変更されたときの処理
             isLocation = locationCheck.isWithinRange(location)
             if(isLocation) {
-                visitCount.add()
                 onLocation(isLocation)
             }
             for(i in MarkerData.markerPosition.indices) {

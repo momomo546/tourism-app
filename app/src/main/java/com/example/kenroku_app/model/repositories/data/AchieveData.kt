@@ -7,5 +7,6 @@ data class AchieveData(
     var checkPointFlag: List<Boolean>,
     var seasonFlag: List<Boolean> = List(4) { false },
     var steps: Int = 0,
-    var visitCount: Int = 0
+    var visitCount: Int = 0,
+    var calenderDate: Long = 0
 )

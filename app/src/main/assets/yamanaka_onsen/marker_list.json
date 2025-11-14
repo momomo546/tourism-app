@@ -69,8 +69,8 @@
     {
       "name": "mitsumataosugi",
       "icon": "HUE_BROWN",
-      "lat": 36.22958920754874,
-      "lng": 136.3666297685451
+      "lat": 36.22944742748809,
+      "lng": 136.36654473239017
     },
     {
       "name": "bashonoyakata",
@@ -87,20 +87,98 @@
     {
       "name": "kogeinoyakata_rokuronosato",
       "icon": "HUE_ORCHID",
-      "lat": 36.23469422958989,
-      "lng": 136.365275526252
+      "lat": 36.22936449577139,
+      "lng": 136.36461322048947
     },
     {
       "name": "hasebejinja",
       "icon": "HUE_DEEP_PINK",
-      "lat": 36.26615012980106,
-      "lng": 136.37994688886923
+      "lat": 36.24417765285588,
+      "lng": 136.3718055904956
     },
     {
       "name": "mugenan",
       "icon": "HUE_LIGHT_BLUE",
       "lat": 36.24103989989474,
       "lng": 136.3721610096297
+    },
+    {
+      "name": "yugekaidou",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.244790276515076,
+      "lng": 136.37260161445846
+    },
+    {
+      "name": "yunomotomatisyoutengai",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.24801,
+      "lng": 136.37385
+    },
+    {
+      "name": "tenboudai",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.247458576311324,
+      "lng": 136.3713754441782
+    },
+    {
+      "name": "onsentamagotenmaenotubo",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.24738,
+      "lng": 136.37423
+    },
+    {
+      "name": "nyannyanmanjuu",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.248,
+      "lng": 136.37459
+    },
+    {
+      "name": "arayakumakichinozou",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.25135,
+      "lng": 136.37373
+    },
+    {
+      "name": "shishigashirando",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.24755661783688,
+      "lng": 136.37359060428633
+    },
+    {
+      "name": "yamanakaonsenkidomonato",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.247825,
+      "lng": 136.374574
+    },
+    {
+      "name": "yahatajinja",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.22980764586757,
+      "lng": 136.36637886790209
+    },
+    {
+      "name": "rokuronosatoannaiban",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.230325571241586,
+      "lng": 136.36597884830172
+    },
+    {
+      "name": "sugawarajinja",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.227770684700594,
+      "lng": 136.3599240505884
+    },
+    {
+      "name": "tennenkinenbututenrannooosugi",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.22752459865023,
+      "lng": 136.35988513734833
+    },
+    {
+      "name": "basyoukuhikoorogityou",
+      "icon": "HUE_LIGHT_YELLOW",
+      "lat": 36.241419237689335,
+      "lng": 136.3711774305126
     }
   ]
 }

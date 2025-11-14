@@ -21,24 +21,23 @@ class StepCounter(
     private var mStepDetectorSensor: Sensor? = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR)
     private var mStepConterSensor: Sensor? = mSensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
 
-    private val sharedPreferences = context.getSharedPreferences("padometor", Context.MODE_PRIVATE)
-    private val editor = sharedPreferences.edit()
-    private var steps = sharedPreferences.getInt("${touristSpotId}_step", 0)
+//    private val sharedPreferences = context.getSharedPreferences("padometor", Context.MODE_PRIVATE)
+//    private val editor = sharedPreferences.edit()
+//    private var steps = sharedPreferences.getInt("${touristSpotId}_step", 0)
     private val achieveData: AchieveData
         get() = requireNotNull(AchieveDataStore.currentAchieveData) {
             "AchieveDataStore.currentAchieveData が null です。先に load() を呼んでください。"
         }
 
 
-//    init {
-//        if (mStepDetectorSensor == null) {
-//            Log.e("StepCounter", "Step Detector Sensor is not available!")
-//        }
-//        if (mStepConterSensor == null) {
-//            Log.e("StepCounter", "Step Counter Sensor is not available!")
-//        }
-//        AchieveData.steps = steps
-//    }
+    init {
+        if (mStepDetectorSensor == null) {
+            Log.e("StepCounter", "Step Detector Sensor is not available!")
+        }
+        if (mStepConterSensor == null) {
+            Log.e("StepCounter", "Step Counter Sensor is not available!")
+        }
+    }
 
     override fun onSensorChanged(event: SensorEvent) {
         if(!viewModel.isLocation) return
@@ -49,12 +48,9 @@ class StepCounter(
             // sensor からの値を取得するなどの処理を行う
             Log.d("type_step_counter", values[0].toString())
         }
-//        steps++
         achieveData.steps++
         AchieveDataStore.save(context,touristSpotId)
-//        editor.putInt("step", steps)
-//        editor.apply()
-        onStepDetected(steps)
+        onStepDetected(achieveData.steps)
     }
 
     fun registerStepCounterListener() {

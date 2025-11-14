@@ -17,6 +17,19 @@
     <string name="yamanaka_onsen_kogeinoyakata_rokuronosato">工芸の館（ろくろの里）</string>
     <string name="yamanaka_onsen_hasebejinja">長谷部神社</string>
     <string name="yamanaka_onsen_mugenan">無限庵</string>
+    <string name="yamanaka_onsen_yugekaidou">ゆげ街道</string>
+    <string name="yamanaka_onsen_yunomotomatisyoutengai">湯の本町商店街</string>
+    <string name="yamanaka_onsen_tenboudai">展望台</string>
+    <string name="yamanaka_onsen_onsentamagotenmaenotubo">温泉卵店前の壺</string>
+    <string name="yamanaka_onsen_nyannyanmanjuu">娘娘饅頭</string>
+    <string name="yamanaka_onsen_arayakumakichinozou">新家熊吉の像</string>
+    <string name="yamanaka_onsen_shishigashirando">ししがしらんど</string>
+    <string name="yamanaka_onsen_yamanakaonsenkidomonato">山中温泉・大木戸門跡</string>
+    <string name="yamanaka_onsen_yahatajinja">八幡神社</string>
+    <string name="yamanaka_onsen_rokuronosatoannaiban">ろくろの里・案内板</string>
+    <string name="yamanaka_onsen_sugawarajinja">菅原神社</string>
+    <string name="yamanaka_onsen_tennenkinenbututenrannooosugi">天然記念物・栢野の大杉（天覧の大杉）</string>
+    <string name="yamanaka_onsen_basyoukuhikoorogityou">芭蕉句碑・こおろぎ町</string>
 
     <string name="yamanaka_onsen_yamanakaza_detail">平成14年、山中温泉の元湯にオープンした山中座は、漆塗りの柱や格子戸風の壁面、蒔絵を施した格天井など山中漆器の粋を集めた格調高い造りが特徴です。毎週土・日・祝日には芸妓連の「山中節四季の舞」が観賞でき、山中節の唄や芸妓の踊りなど山中伝統の芸能に親しむことができます。山中温泉街の観光の拠点として充実した観光案内に加え、地元土産品販売の売店やコインロッカーも完備。またコンベンションホールとしても活用されています。　</string>
     <string name="yamanaka_onsen_souyu_detail">天平風の優雅な造りの総湯で、温泉の発見以来湯ざや（共同湯）が造られた場所に建っています。おとこ湯は重厚な天平風の建物で、腰まである深い浴槽が特徴。おんな湯は華麗で優雅な曲線美をなす造りとなっており、浴槽には浅い所と深い所があります。男女別棟の総湯は全国的にも珍しく、おんな湯には山中節の館「山中座」が隣接しています。</string>
@@ -35,5 +48,44 @@
     <string name="yamanaka_onsen_kogeinoyakata_rokuronosato_detail">地元の職人から直接手ほどきを得て、ろくろ木地挽き体験ができます。漆器は木地師・下地師・塗師・蒔絵師の分業によって作られています。山中漆器は木地の仕上げが表に現れる拭漆仕上げが魅力で、木地師によるカンナの切れ味が大きく影響するのが特徴です。木目が見えない仕上げに比べて木地師の技術が重要な位置づけをしめ、木肌をいかに綺麗に仕上げるかが重要になります。</string>
     <string name="yamanaka_onsen_hasebejinja_detail">ゆげ街道の脇道の坂を登り切ったところにある長谷部神社は、兵乱のために一時荒廃した山中温泉を再興したと伝えられる鎌倉時代前期の武士、長谷部信連を祀る神社です。信連は平家物語や源平盛衰記にもその名が示される鎌倉幕府の御家人で、死後は山中温泉の守護神として信仰の対象となっています。</string>
     <string name="yamanaka_onsen_mugenan_detail">こおろぎ橋を渡り坂道を少し上った先に佇む無限庵は、加賀藩家老であった横山家が金沢市の邸内に建てた書院を移築したもので、明治末期の木造技術の枠を傾けた最高級の普請であったと伝えられています。金沢市にある国指定重要文化財・成巽閣に見られる武家邸宅書院の伝統を継承する近代の書院造として貴重な遺構であり、また古九谷や加賀蒔絵、千利休ゆかりの茶道具など、数々の古美術品を展示しています。</string>
+    <string name="yamanaka_onsen_yugekaidou_detail">温泉の祖、長谷部神社を中心に広がる「ゆげ街道」。 山中漆器や九谷焼などのギャラリー店が多く軒を連ねます。\nまた、街道にはCAFEや食事処、美味しいコロッケのお店もあり、散策が楽しめます。</string>
+    <string name="yamanaka_onsen_yunomotomatisyoutengai_detail">湯の本町商店街</string>
+    <string name="yamanaka_onsen_tenboudai_detail">展望台</string>
+    <string name="yamanaka_onsen_onsentamagotenmaenotubo_detail">温泉卵店前の壺</string>
+    <string name="yamanaka_onsen_nyannyanmanjuu_detail">娘娘饅頭</string>
+    <string name="yamanaka_onsen_arayakumakichinozou_detail">新家熊吉の像</string>
+    <string name="yamanaka_onsen_shishigashirando_detail">ししがしらんど</string>
+    <string name="yamanaka_onsen_yamanakaonsenkidomonato_detail">山中温泉・大木戸門跡</string>
+
+    <string name="yamanaka_onsen_detail_info_marker_01">平成14年、山中温泉の元湯にオープンした山中座は、漆塗りの柱や格子戸風の壁面、蒔絵を施した格天井など山中漆器の粋を集めた格調高い造りが特徴です。毎週土・日・祝日には芸妓連の「山中節四季の舞」が観賞でき、山中節の唄や芸妓の踊りなど山中伝統の芸能に親しむことができます。山中温泉街の観光の拠点として充実した観光案内に加え、地元土産品販売の売店やコインロッカーも完備。またコンベンションホールとしても活用されています。　</string>
+    <string name="yamanaka_onsen_detail_info_marker_02">天平風の優雅な造りの総湯で、温泉の発見以来湯ざや（共同湯）が造られた場所に建っています。おとこ湯は重厚な天平風の建物で、腰まである深い浴槽が特徴。おんな湯は華麗で優雅な曲線美をなす造りとなっており、浴槽には浅い所と深い所があります。男女別棟の総湯は全国的にも珍しく、おんな湯には山中節の館「山中座」が隣接しています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_03">鶴仙渓に架かる総ひのきの造りの橋で、山中温泉を代表する名勝地です。四季折々の風情、日本の情緒が感じられ、一年を通じて多くの観光客が訪れます。「こおろぎ」の名の由来は、かつて行路が極めて危なかったので「行路危（こうろぎ）」と称されたとも、秋の夜に鳴くこおろぎの声に由来するとも言われています。2019年10月12日、4代目のこおろぎ橋が完成しました。</string>
+    <string name="yamanaka_onsen_detail_info_marker_04">鶴仙渓上流のこおろぎ橋と下流の黒谷橋のほぼ中間に位置する長さ94.7メートルの徒歩専用橋で、草月流家元・勅使河原宏氏が「鶴仙渓を活ける」というコンセプトのもとデザインしました。紅紫色のS字橋の斬新さと周囲の景観が調和した美しさは絶景です。夜は九谷五彩をイメージしたライトアップを毎夜開催しています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_05">鶴仙渓のもっとも下流で大きな淵をなし奇岩・名瀑に風趣をそろえる辺りが黒谷で、そこに架かる重厚なアーチ型の石橋が黒谷橋です。この石橋は昭和10年に架けられたもので、それ以前にも木造の橋があり、古くから多くの人がこの黒谷橋を通って小松・那谷寺へと旅立ったと言われています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_06">安土桃山時代、天正年間から山中の地に伝わる山中漆器の産業振興拠点として、昭和56年に建設されました。1階は伝統工芸品の展示、技法の公開、供覧など一般的に広く開放され、2階は伝統的な技術、技法継承のための研修の場として利用されています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_07">桂清水は樹齢５００年と言われる桂の木の根元近くから湧き出しています。昔は山中温泉の玄関口と呼ばれた場所です。昔、湯女と湯治客が別れを惜しんだ場所として知られています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_08">奥の細道で北国行脚の折りに立ち寄り、「山中や菊は手折らじ湯のにほい」と詠んで名湯ぶりを讃えた俳聖松尾芭蕉を祀る御堂です。創建は明治43年10月で、平成22年には鶴仙渓遊歩道とともに100周年を迎えました。周辺の風景の美しさに芭蕉は「行脚の楽しみここにあり」と手をたたいて喜んだと言われています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_09">創立年代不詳であるが、古くより産土神と祀られ村民の崇敬をうけ、従前は石像の観世音であったが明治5年神鏡に改め、同18年白山社を白山神社と改称。昭和6年5月7日当町未曾有の大火により社殿炎上、直ちに仮殿造営。同14年5月21日社殿新築造営される。薬師山一番地より現社地に移転遷座す。</string>
+    <string name="yamanaka_onsen_detail_info_marker_10">行基開創による朱塗りの多宝塔を持つ寺院で、山中温泉を守護するお寺として薬師如来を奉っていることから町の人々からは「お薬師さん」と呼ばれ親しまれています。宝物館を有し、国指定重要文化財の陶製金剛童子立像、松尾芭蕉が山中を訪れた際に忘れていったと伝えられる芭蕉の忘れ杖、温泉の由来を伝える山中温泉縁起絵巻絵図などが展示されています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_11">北陸随一の渓谷美を誇る名所。こおろぎ橋より黒谷橋に至る1.3キロの渓谷には遊歩道が整備され、四季折々の景観と立ち並ぶ奇岩怪石、橋めぐりを楽しむことができます。また、あやとりはしの袂では4月から11月まで「鶴仙渓川床」が営業しており、山中出身の料理人・道場六三郎氏のレシピによるスイーツを味わうこともできます。</string>
+    <string name="yamanaka_onsen_detail_info_marker_12">伝承によると、当時、村人達がこの大杉を使って帆掛け舟の帆柱にしようとしたところ、それを察した大杉が一晩で３つ又に分かれ帆柱で利用出来なくなるように姿を変えたと伝えられています。大杉は推定樹齢２３００年、樹高５４ｍ、幹周８ｍ、大変貴重な事から昭和１８年（１９４３）に国指定天然記念物に指定されています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_13">芭蕉の館は、芭蕉が山中温泉を訪れ逗留した泉屋に隣接していた「扇屋」の別荘を平成16年に再整備したものです。明治38年の建築で、広い庭園や庭園を望む雁行型の濡れ縁など、和風情緒豊かな憩いの空間が親しまれてきました。芭蕉ゆかりの品や400余年の歴史を有する伝統工芸「山中漆器」の秀品の数々が展示されています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_14">蓮如さんゆかりの「椿清水」「八房の梅」「お腰かけの石」が今でも残されている。</string>
+    <string name="yamanaka_onsen_detail_info_marker_15">地元の職人から直接手ほどきを得て、ろくろ木地挽き体験ができます。漆器は木地師・下地師・塗師・蒔絵師の分業によって作られています。山中漆器は木地の仕上げが表に現れる拭漆仕上げが魅力で、木地師によるカンナの切れ味が大きく影響するのが特徴です。木目が見えない仕上げに比べて木地師の技術が重要な位置づけをしめ、木肌をいかに綺麗に仕上げるかが重要になります。</string>
+    <string name="yamanaka_onsen_detail_info_marker_16">ゆげ街道の脇道の坂を登り切ったところにある長谷部神社は、兵乱のために一時荒廃した山中温泉を再興したと伝えられる鎌倉時代前期の武士、長谷部信連を祀る神社です。信連は平家物語や源平盛衰記にもその名が示される鎌倉幕府の御家人で、死後は山中温泉の守護神として信仰の対象となっています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_17">こおろぎ橋を渡り坂道を少し上った先に佇む無限庵は、加賀藩家老であった横山家が金沢市の邸内に建てた書院を移築したもので、明治末期の木造技術の枠を傾けた最高級の普請であったと伝えられています。金沢市にある国指定重要文化財・成巽閣に見られる武家邸宅書院の伝統を継承する近代の書院造として貴重な遺構であり、また古九谷や加賀蒔絵、千利休ゆかりの茶道具など、数々の古美術品を展示しています。</string>
+    <string name="yamanaka_onsen_detail_info_marker_18">温泉の祖、長谷部神社を中心に広がる「ゆげ街道」。 山中漆器や九谷焼などのギャラリー店が多く軒を連ねます。\nまた、街道にはCAFEや食事処、美味しいコロッケのお店もあり、散策が楽しめます。</string>
+    <string name="yamanaka_onsen_detail_info_marker_19">温泉街の中心エリアに広がる商店街「湯の本町商店街」。温泉街らしい温かい雰囲気の町並みで、飲食店・土産物店・アイススイーツ専門店などが軒を連ねています。例えば「アイスストリート」という企画では、商店街の各店がオリジナルのアイスを提供しており、散策しながら軽く立ち寄るのにぴったりです。</string>
+    <string name="yamanaka_onsen_detail_info_marker_20">展望台。山中温泉街を一望できます。</string>
+    <string name="yamanaka_onsen_detail_info_marker_21">温泉卵店前の壺</string>
+    <string name="yamanaka_onsen_detail_info_marker_22">山中温泉を代表する銘菓「娘娘万頭（にゃあにゃあまんじゅう）」。創業明治38年の和菓子店 山中石川屋 が製造・販売しており、黒糖と地産味噌の香りがほのかに漂うまろやかな皮と、北海道産小豆を使ったこし餡が特徴です。</string>
+    <string name="yamanaka_onsen_detail_info_marker_23">新家熊吉は、石川県の加賀の山村にある山中村にて元治元年、新本孫吉の次男として生まれる。現在の新家工業㈱の前身となる新家自転車製造㈱の設立、現在の㈱北陸銀行の前身となる㈱新家銀行の設立に携わった。</string>
+    <string name="yamanaka_onsen_detail_info_marker_24">「ししがしらんど」は、湯の本町商店街通りにある常設展示広場で、祭りで担がれる『大獅子神輿』の展示など、地域の伝統・祭り文化を感じるスポットです。</string>
+    <string name="yamanaka_onsen_detail_info_marker_25">山中温泉・大木戸門跡</string>
+    <string name="yamanaka_onsen_detail_info_marker_26">八幡神社。創立年代は不詳ですが、天保15年（1844年）に拝殿建立、その後明治期に改称・本殿改築が行われています。また境内には「大杉（国指定天然記念物）」もあり、樹齢数千年に及ぶとされる杉の巨木が見られる見どころです。</string>
+    <string name="yamanaka_onsen_detail_info_marker_27">ろくろの里・案内板</string>
+    <string name="yamanaka_onsen_detail_info_marker_28">菅原神社。境内には栢野の大杉（通称「天覧の大杉」）があり、幹の周囲11ｍ・高さ約54ｍと巨大で、樹齢2,300年とも言われる国の天然記念物です。</string>
+    <string name="yamanaka_onsen_detail_info_marker_29">天然記念物・栢野の大杉（天覧の大杉）。幹の周囲11ｍ・高さ約54ｍと巨大で、樹齢2,300年とも言われる国の天然記念物です。</string>
+    <string name="yamanaka_onsen_detail_info_marker_30">芭蕉句碑・こおろぎ町</string>
 
 </resources>

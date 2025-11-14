@@ -12,6 +12,8 @@ object AchieveDataStore {
     var currentAchieveData: AchieveData? = null
 
     fun load(context: Context, touristSpotId: String){
+        Log.d("AchieveDataStore","LoadAchieveData")
+        Log.d("AchieveDataStore",touristSpotId)
         val prefs = context.getSharedPreferences(PREF_NAME+"_"+touristSpotId, Context.MODE_PRIVATE)
         val json = prefs.getString(touristSpotId, null)
 
@@ -25,6 +27,8 @@ object AchieveDataStore {
     }
 
     fun save(context: Context, touristSpotId: String) {
+        Log.d("AchieveDataStore","SaveEmptyAchieveData")
+        Log.d("AchieveDataStore",touristSpotId)
         if (currentAchieveData == null) return
         val prefs = context.getSharedPreferences(PREF_NAME+"_"+touristSpotId, Context.MODE_PRIVATE)
         val json = Json.encodeToString<AchieveData>(currentAchieveData!!)
@@ -38,13 +42,14 @@ object AchieveDataStore {
         if(touristSpotId =="kenrokuen"){
             checkPointCount = 27
         }else if(touristSpotId =="yamanaka_onsen"){
-            checkPointCount = 17
+            checkPointCount = 30
         }
         return AchieveData(
             checkPointFlag = List(checkPointCount) { false },
             seasonFlag = List(4) { false },
             steps = 0,
-            visitCount = 0
+            visitCount = 0,
+            calenderDate = 0
         )
     }
 }

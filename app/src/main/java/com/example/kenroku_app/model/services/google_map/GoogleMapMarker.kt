@@ -10,6 +10,7 @@ import com.example.kenroku_app.R
 import com.example.kenroku_app.model.repositories.data.AchieveData
 import com.example.kenroku_app.model.repositories.data.AchieveDataStore
 import com.example.kenroku_app.model.repositories.data.MarkerData
+import com.example.kenroku_app.viewmodel.PointsViewModel
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
@@ -33,7 +34,6 @@ class GoogleMapMarker(
             "AchieveDataStore.currentAchieveData が null です。先に load() を呼んでください。"
         }
 
-
     init{
         loadMarkerConfig(touristSpotId,assetManager)
     }
@@ -54,21 +54,38 @@ class GoogleMapMarker(
 
         for (i in 0 until jsonArray.length()) {
             val jsonData = jsonArray.getJSONObject(i)
-            val latLng = LatLng(jsonData.getDouble("lat"),jsonData.getDouble("lng"))
+            val latLng = LatLng(jsonData.getDouble("lat"), jsonData.getDouble("lng"))
             val name = jsonData.getString("name")
-            //val iconColor = jsonData.getString("icon")
-            val resourceText = context.resources.getIdentifier("${touristSpotId}_${name}", "string", context.packageName)
-            //文字列リソースの確認
+
+            val resourceText = context.resources.getIdentifier(
+                "${touristSpotId}_${name}",
+                "string",
+                context.packageName
+            )
+
             try {
-                println(context.getString(resourceText)) // 正常に取得できた場合の処理
+                println(context.getString(resourceText))
             } catch (e: Resources.NotFoundException) {
                 Log.e("ResourceError", "リソースが見つかりません: ${touristSpotId}_${name}", e)
             }
+
+            var hue = BitmapDescriptorFactory.HUE_RED
+            // マーカー色をリストに応じて決定
+            if (touristSpotId=="yamanaka_onsen") {
+                hue = when (i) {
+                    in PointsViewModel.points1List -> BitmapDescriptorFactory.HUE_GREEN
+                    in PointsViewModel.points2List -> BitmapDescriptorFactory.HUE_ORANGE
+                    in PointsViewModel.points3List -> BitmapDescriptorFactory.HUE_RED
+                    else -> BitmapDescriptorFactory.HUE_BLUE // デフォルト
+                }
+            }
+
+            // マーカーを追加
             MarkerData.markerPosition.add(latLng)
             MarkerData.markerOptionList.add(
                 MarkerOptions()
                     .position(latLng)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))
+                    .icon(BitmapDescriptorFactory.defaultMarker(hue))
                     .title(context.getString(resourceText))
             )
         }
