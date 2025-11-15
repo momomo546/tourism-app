@@ -26,7 +26,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val steps: LiveData<Int> get() = _steps
     val message: LiveData<String> get() = _message
     val touristSpotId: LiveData<String> get() = _touristSpotId
-    var isLocation = false
+    var isLocation = true
     private var onPopUpCallback: ((String) -> Unit)? = null
 
     fun initializeServices() {
@@ -95,5 +95,10 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     fun setTouristSpotId(value: String) {
         _touristSpotId.value = value
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        gpsManager.onDestroy()   // ← ここで GPX を閉じる！
     }
 }

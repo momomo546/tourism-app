@@ -40,6 +40,7 @@ class StepCounter(
     }
 
     override fun onSensorChanged(event: SensorEvent) {
+        Log.d("step", achieveData.steps.toString())
         if(!viewModel.isLocation) return
         val sensor = event.sensor
         val values = event.values

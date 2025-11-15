@@ -27,10 +27,22 @@ class GPSManager(
     }
     val locationCheck = LocationCheck()
 
+    private val gpxWriter = GpxWriter(context)
+
     private val locationListener = object : LocationListener {
         override fun onLocationChanged(location: Location) {
             // 位置情報が変更されたときの処理
+
+            // GPX に追記！
+            gpxWriter.writeTrackPoint(
+                lat = location.latitude,
+                lon = location.longitude,
+                time = System.currentTimeMillis()
+            )
+
+            // 観光地内かどうかをチェック
             isLocation = locationCheck.isWithinRange(location)
+            Log.d("step",isLocation.toString())
             if(isLocation) {
                 onLocation(isLocation)
             }
@@ -55,6 +67,10 @@ class GPSManager(
         override fun onProviderDisabled(provider: String) {
             // プロバイダが無効になったときの処理
         }
+    }
+
+    fun onDestroy() {
+        gpxWriter.closeFile()  // アプリ終了時に閉じる
     }
 
     fun registerGpsUpdates() {
