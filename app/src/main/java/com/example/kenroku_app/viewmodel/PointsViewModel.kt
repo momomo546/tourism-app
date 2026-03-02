@@ -44,18 +44,35 @@ class PointsViewModel : ViewModel() {
         10 to 25,
         11 to 20,
         12 to 18,
-        13 to 15,
-        14 to 10,
-        15 to 8,
-        16 to 5,
-        17 to 3,
-        18 to 2
+        13 to 20,
+        14 to 20,
+        15 to 20,
+        16 to 15,
+        17 to 15,
+        18 to 15,
+        19 to 15,
+        20 to 15,
+        21 to 10,
+        22 to 10,
+        23 to 10,
+        24 to 10,
+        25 to 10,
+        26 to 10,
+        27 to 10,
+        28 to 10,
+        29 to 8,
+        30 to 5,
+        31 to 3,
+        32 to 2
     )
 
     companion object {
         val points1List = listOf(6,19,20,21,22,23,24,26,29)
         val points2List = listOf(1, 2, 4, 8, 9, 10, 11, 13,15,16,18,25,27,28)
         val points3List = listOf(0, 3, 5, 7, 12,14,17)
+//        val points1List = listOf(100)
+//        val points2List = listOf(1, 2, 4, 8, 9, 10, 11, 13,15,16,18,25,27,28,6,19,20,21,22,23,24,26,29,0, 3, 5, 7, 12,14,17)
+//        val points3List = listOf(101)
     }
 
     // 例: flagはBoolのList、ポイントグループはIntのList（獲得フラグのインデックス）
@@ -107,6 +124,7 @@ class PointsViewModel : ViewModel() {
         val myPercent = (belowMe + sameScore / 2.0) / totalPlayers * 100
 
         _rankText.value = "あなたは上位 ${"%.1f".format(100 - myPercent)}%の得点です！"
+//        _rankText.value = "xxx"
     }
 
     // 値セット用関数

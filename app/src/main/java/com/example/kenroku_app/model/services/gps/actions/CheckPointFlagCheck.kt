@@ -14,7 +14,7 @@ class CheckPointFlagCheck(val context: Context) {
     private val gson = Gson()
 
     private val AREA = 15
-    private var checkPointFlag = MutableList(27) { false }
+    private var checkPointFlag = MutableList(30) { false }
     private val fileString = "${touristSpotId}_checkPointFlag"
     private val achieveData: AchieveData
         get() = requireNotNull(AchieveDataStore.currentAchieveData) {
